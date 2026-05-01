@@ -1,0 +1,23 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: naejeon-postgres
+    environment:
+      POSTGRES_DB: naejeon
+      POSTGRES_USER: naejeon
+      POSTGRES_PASSWORD: naejeon
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: naejeon-redis
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+
+volumes:
+  postgres_data:

@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>내전 플랫폼 - 내전을 즐기기 좋게 만드는 서비스</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['Pretendard', 'system-ui', 'sans-serif'],
+        },
+        colors: {
+          base: {
+            50:  '#faf9f7',  // 가장 밝은 배경
+            100: '#f4f2ee',  // 살짝 어두운 섹션 배경
+            200: '#e8e5df',  // 카드 보더
+            300: '#d4cfc6',
+            400: '#a8a298',
+            500: '#7a7468',
+            600: '#5c5648',
+            700: '#403a30',
+            800: '#2a261f',
+            900: '#1a1813',
+          },
+          brand: {
+            50: '#f5f3ff',
+            100: '#ede9fe',
+            500: '#8b5cf6',
+            600: '#7c3aed',
+            700: '#6d28d9',
+          }
+        }
+      }
+    }
+  }
+</script>
+<style>
+  body { font-family: 'Pretendard', system-ui, sans-serif; }
+  .gradient-text {
+    background: linear-gradient(135deg, #7c3aed 0%, #06b6d4 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-bg {
+    background:
+      radial-gradient(ellipse 80% 50% at 50% 0%, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
+      radial-gradient(ellipse 60% 40% at 80% 80%, rgba(6, 182, 212, 0.06) 0%, transparent 50%);
+  }
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(64,58,48,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(64,58,48,0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, black 0%, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, black 0%, transparent 70%);
+  }
+  .card-hover { transition: all 0.2s ease; }
+  .card-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px -8px rgba(64, 58, 48, 0.12);
+    border-color: rgba(139, 92, 246, 0.3);
+  }
+</style>
+</head>
+<body class="bg-base-50 text-base-900 antialiased">
+
+<!-- Navigation -->
+<nav class="fixed top-0 inset-x-0 z-50 border-b border-base-200/80 backdrop-blur-xl bg-base-50/85">
+  <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+    <div class="flex items-center gap-8">
+      <a href="#" class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-500 to-cyan-500 flex items-center justify-center shadow-sm">
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+          </svg>
+        </div>
+        <span class="font-semibold text-lg">내전.gg</span>
+      </a>
+      <div class="hidden md:flex items-center gap-6 text-sm text-base-600">
+        <a href="#features" class="hover:text-base-900 transition">기능</a>
+        <a href="#how" class="hover:text-base-900 transition">이용 방법</a>
+        <a href="#games" class="hover:text-base-900 transition">지원 게임</a>
+        <a href="#" class="hover:text-base-900 transition">FAQ</a>
+      </div>
+    </div>
+    <div class="flex items-center gap-3">
+      <a href="#" class="hidden sm:block text-sm text-base-700 hover:text-base-900 transition">로그인</a>
+      <a href="#" class="text-sm bg-base-900 text-base-50 px-4 py-2 rounded-lg font-medium hover:bg-base-800 transition shadow-sm">
+        시작하기
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="pt-32 pb-20 hero-bg relative overflow-hidden">
+  <div class="absolute inset-0 grid-bg"></div>
+  <div class="max-w-7xl mx-auto px-6 relative">
+    <div class="max-w-3xl mx-auto text-center">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-base-200 bg-base-50 text-xs text-base-600 mb-6 shadow-sm">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+        롤 · 오버워치 지원 중
+      </div>
+      <h1 class="text-5xl md:text-6xl font-bold tracking-tight mb-6 text-base-900">
+        내전을 <span class="gradient-text">제대로</span> 즐기는<br>
+        가장 쉬운 방법
+      </h1>
+      <p class="text-lg text-base-600 mb-10 leading-relaxed">
+        경매로 팀을 짜고, 자동으로 매칭하고, 결과까지 한번에.<br>
+        스트리머와 시청자를 위한 내전 진행 도구.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+        <a href="#" class="w-full sm:w-auto bg-base-900 text-base-50 px-6 py-3 rounded-lg font-medium hover:bg-base-800 transition flex items-center justify-center gap-2 shadow-sm">
+          무료로 시작하기
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+          </svg>
+        </a>
+        <a href="#" class="w-full sm:w-auto border border-base-200 bg-base-50 px-6 py-3 rounded-lg font-medium text-base-700 hover:bg-base-100 transition">
+          어떻게 작동하나요?
+        </a>
+      </div>
+
+      <!-- Stats -->
+      <div class="mt-16 grid grid-cols-3 gap-8 max-w-2xl mx-auto">
+        <div>
+          <div class="text-3xl font-bold gradient-text">2,400+</div>
+          <div class="text-sm text-base-500 mt-1">진행된 내전</div>
+        </div>
+        <div>
+          <div class="text-3xl font-bold gradient-text">12,800</div>
+          <div class="text-sm text-base-500 mt-1">등록된 플레이어</div>
+        </div>
+        <div>
+          <div class="text-3xl font-bold gradient-text">98%</div>
+          <div class="text-sm text-base-500 mt-1">매치 완료율</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section id="features" class="py-24 border-t border-base-200/60 bg-base-100/60">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="max-w-2xl mb-16">
+      <div class="text-sm font-semibold text-brand-600 mb-3">FEATURES</div>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 text-base-900">
+        팀 짜기부터 결과 확정까지,<br>
+        <span class="text-base-500">필요한 모든 것</span>
+      </h2>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <!-- Feature 1 -->
+      <div class="card-hover p-6 rounded-xl border border-base-200 bg-base-50">
+        <div class="w-10 h-10 rounded-lg bg-brand-50 border border-brand-100 flex items-center justify-center mb-4">
+          <svg class="w-5 h-5 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold mb-2 text-base-900">실시간 경매</h3>
+        <p class="text-sm text-base-600 leading-relaxed">
+          영국식 경매로 팀장이 직접 선수를 입찰. 20초 카운트다운, 시간 리셋, 패스 시스템까지.
+        </p>
+      </div>
+
+      <!-- Feature 2 -->
+      <div class="card-hover p-6 rounded-xl border border-base-200 bg-base-50">
+        <div class="w-10 h-10 rounded-lg bg-cyan-50 border border-cyan-100 flex items-center justify-center mb-4">
+          <svg class="w-5 h-5 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold mb-2 text-base-900">자동 팀 배정</h3>
+        <p class="text-sm text-base-600 leading-relaxed">
+          경매가 부담스럽다면? 포지션 균형을 맞춘 자동 매칭으로 빠르게 시작.
+        </p>
+      </div>
+
+      <!-- Feature 3 -->
+      <div class="card-hover p-6 rounded-xl border border-base-200 bg-base-50">
+        <div class="w-10 h-10 rounded-lg bg-emerald-50 border border-emerald-100 flex items-center justify-center mb-4">
+          <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold mb-2 text-base-900">공정한 결과 확정</h3>
+        <p class="text-sm text-base-600 leading-relaxed">
+          양 팀 팀장이 결과 신고. 분쟁 발생 시 관리자가 검토. BO3, 무효판도 깔끔하게.
+        </p>
+      </div>
+
+      <!-- Feature 4 -->
+      <div class="card-hover p-6 rounded-xl border border-base-200 bg-base-50">
+        <div class="w-10 h-10 rounded-lg bg-amber-50 border border-amber-100 flex items-center justify-center mb-4">
+          <svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold mb-2 text-base-900">매치 히스토리</h3>
+        <p class="text-sm text-base-600 leading-relaxed">
+          모든 내전 기록을 마이페이지에서 한눈에. 팀 구성, 결과, 획득 포인트까지.
+        </p>
+      </div>
+
+      <!-- Feature 5 -->
+      <div class="card-hover p-6 rounded-xl border border-base-200 bg-base-50">
+        <div class="w-10 h-10 rounded-lg bg-pink-50 border border-pink-100 flex items-center justify-center mb-4">
+          <svg class="w-5 h-5 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold mb-2 text-base-900">꾸미기 시스템</h3>
+        <p class="text-sm text-base-600 leading-relaxed">
+          매치를 통해 포인트 획득. 미니게임, 가챠, 아이템 구매로 프로필 꾸미기.
+        </p>
+      </div>
+
+      <!-- Feature 6 -->
+      <div class="card-hover p-6 rounded-xl border border-base-200 bg-base-50">
+        <div class="w-10 h-10 rounded-lg bg-blue-50 border border-blue-100 flex items-center justify-center mb-4">
+          <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold mb-2 text-base-900">실시간 알림</h3>
+        <p class="text-sm text-base-600 leading-relaxed">
+          경매 시작, 입찰 결과, 매치 종료까지. WebSocket 기반 실시간 알림.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How it works -->
+<section id="how" class="py-24 border-t border-base-200/60">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="max-w-2xl mb-16">
+      <div class="text-sm font-semibold text-brand-600 mb-3">HOW IT WORKS</div>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 text-base-900">
+        3단계로 끝나는 내전 진행
+      </h2>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="relative">
+        <div class="text-6xl font-bold text-base-300 mb-4">01</div>
+        <h3 class="text-xl font-semibold mb-3 text-base-900">방 만들기</h3>
+        <p class="text-base-600 text-sm leading-relaxed">
+          게임을 선택하고 방을 생성. 일반 방 또는 스트리머 방으로 운영. 초대 코드로 참가자 모집.
+        </p>
+      </div>
+
+      <div class="relative">
+        <div class="text-6xl font-bold text-base-300 mb-4">02</div>
+        <h3 class="text-xl font-semibold mb-3 text-base-900">팀 구성하기</h3>
+        <p class="text-base-600 text-sm leading-relaxed">
+          경매로 팀을 짜거나, 자동 매칭으로 빠르게 진행. 모드는 방장이 선택.
+        </p>
+      </div>
+
+      <div class="relative">
+        <div class="text-6xl font-bold text-base-300 mb-4">03</div>
+        <h3 class="text-xl font-semibold mb-3 text-base-900">게임하고 결과 신고</h3>
+        <p class="text-base-600 text-sm leading-relaxed">
+          외부에서 게임 진행 후 팀장이 결과 신고. 자동으로 포인트 지급, 매치 히스토리 기록.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Games -->
+<section id="games" class="py-24 border-t border-base-200/60 bg-base-100/60">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="max-w-2xl mb-16">
+      <div class="text-sm font-semibold text-brand-600 mb-3">SUPPORTED GAMES</div>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 text-base-900">
+        지원 게임
+      </h2>
+      <p class="text-base-600">
+        리그 오브 레전드와 오버워치로 시작합니다. 더 많은 게임이 곧 추가됩니다.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-4">
+      <div class="card-hover p-8 rounded-xl border border-base-200 bg-base-50">
+        <div class="flex items-start justify-between mb-6">
+          <div>
+            <div class="text-2xl font-bold mb-1 text-base-900">리그 오브 레전드</div>
+            <div class="text-sm text-base-500">5v5 · 포지션 5개</div>
+          </div>
+          <div class="px-2 py-1 rounded text-xs bg-emerald-50 text-emerald-700 border border-emerald-200">
+            지원 중
+          </div>
+        </div>
+        <div class="space-y-2 text-sm text-base-600">
+          <div class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+            </svg>
+            티어 인증 (아이언 ~ 챌린저)
+          </div>
+          <div class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+            </svg>
+            포지션별 경매
+          </div>
+          <div class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+            </svg>
+            BO3 시리즈 지원
+          </div>
+        </div>
+      </div>
+
+      <div class="card-hover p-8 rounded-xl border border-base-200 bg-base-50">
+        <div class="flex items-start justify-between mb-6">
+          <div>
+            <div class="text-2xl font-bold mb-1 text-base-900">오버워치 2</div>
+            <div class="text-sm text-base-500">5v5 · 역할군 3종</div>
+          </div>
+          <div class="px-2 py-1 rounded text-xs bg-emerald-50 text-emerald-700 border border-emerald-200">
+            지원 중
+          </div>
+        </div>
+        <div class="space-y-2 text-sm text-base-600">
+          <div class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+            </svg>
+            랭크 인증 (브론즈 ~ 그랜드마스터)
+          </div>
+          <div class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+            </svg>
+            역할군별 경매 (탱/딜/힐)
+          </div>
+          <div class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+            </svg>
+            단판 / 다전제 모두 지원
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-6 p-6 rounded-xl border border-dashed border-base-300 bg-base-50 text-center">
+      <div class="text-base-600 text-sm">
+        <span class="text-base-900 font-medium">발로란트, 배틀그라운드</span> 등 추가 게임 준비 중입니다
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="py-24 border-t border-base-200/60">
+  <div class="max-w-4xl mx-auto px-6">
+    <div class="relative rounded-2xl border border-base-200 bg-gradient-to-br from-brand-50 via-base-50 to-cyan-50 p-12 text-center overflow-hidden shadow-sm">
+      <div class="relative">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4 text-base-900">
+          지금 바로 시작해보세요
+        </h2>
+        <p class="text-base-600 mb-8">
+          가입은 무료. 친구들과 첫 내전을 시작하기까지 5분이면 충분합니다.
+        </p>
+        <a href="#" class="inline-flex items-center gap-2 bg-base-900 text-base-50 px-6 py-3 rounded-lg font-medium hover:bg-base-800 transition shadow-sm">
+          무료로 시작하기
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="border-t border-base-200/60 py-12 bg-base-100/60">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+      <div class="flex items-center gap-2">
+        <div class="w-7 h-7 rounded-lg bg-gradient-to-br from-brand-500 to-cyan-500 flex items-center justify-center">
+          <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+          </svg>
+        </div>
+        <span class="font-semibold text-sm text-base-900">내전.gg</span>
+        <span class="text-base-500 text-sm">· 내전을 즐기기 좋게 만드는 서비스</span>
+      </div>
+      <div class="flex items-center gap-6 text-sm text-base-500">
+        <a href="#" class="hover:text-base-900 transition">이용약관</a>
+        <a href="#" class="hover:text-base-900 transition">개인정보처리방침</a>
+        <a href="#" class="hover:text-base-900 transition">문의</a>
+      </div>
+    </div>
+    <div class="mt-8 pt-8 border-t border-base-200/60 text-xs text-base-400">
+      © 2026 내전.gg. All rights reserved.
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
