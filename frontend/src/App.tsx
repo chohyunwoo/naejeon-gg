@@ -1,10 +1,12 @@
 import { Routes, Route } from 'react-router-dom';
-import { PlaceholderPage } from '@/pages/PlaceholderPage';
+import { LandingPage } from '@/features/landing/LandingPage';
+import { DevHealthPage } from '@/pages/DevHealthPage';
 
 export function App() {
   return (
     <Routes>
-      <Route path="/" element={<PlaceholderPage />} />
+      <Route path="/" element={<LandingPage />} />
+      {import.meta.env.DEV && <Route path="/dev" element={<DevHealthPage />} />}
     </Routes>
   );
 }

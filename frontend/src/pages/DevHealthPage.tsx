@@ -1,7 +1,6 @@
 import { useHealthCheck } from '@/hooks/useHealthCheck';
 
-export function PlaceholderPage() {
-  const isDev = import.meta.env.DEV;
+export function DevHealthPage() {
   const health = useHealthCheck();
 
   return (
@@ -19,20 +18,22 @@ export function PlaceholderPage() {
         </h1>
 
         <p className="mt-6 max-w-2xl text-lg leading-relaxed text-base-600">
-          내전을 즐기기 좋게 만드는 서비스.
+          개발 모드 전용 헬스체크 페이지.
           <br />
-          Step 2에서 메인 페이지가 들어옵니다.
+          메인 페이지는{' '}
+          <a href="/" className="underline hover:text-base-900">
+            /
+          </a>
+          로 이동.
         </p>
 
-        {isDev && (
-          <section aria-label="헬스체크 결과 (개발 모드)" className="mt-12 w-full max-w-md">
-            <HealthCard
-              status={health.isPending ? 'pending' : health.isError ? 'error' : 'ok'}
-              data={health.data}
-              error={health.error}
-            />
-          </section>
-        )}
+        <section aria-label="헬스체크 결과 (개발 모드)" className="mt-12 w-full max-w-md">
+          <HealthCard
+            status={health.isPending ? 'pending' : health.isError ? 'error' : 'ok'}
+            data={health.data}
+            error={health.error}
+          />
+        </section>
       </div>
     </main>
   );
