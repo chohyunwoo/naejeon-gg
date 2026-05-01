@@ -11,7 +11,7 @@
 ## 기술 스택
 
 ### 백엔드
-- Java 17 + Spring Boot 3.x
+- Java 17 + Spring Boot 4.0.x
 - Spring Data JPA, Spring Security, Spring WebSocket (STOMP), Validation
 - PostgreSQL 15 + Redis 7
 - Cloudflare R2 (스토리지)
@@ -173,7 +173,9 @@ test(point): 일일 상한 계산 테스트 추가
 - 프로덕션 로그는 INFO 레벨
 
 ### CSRF 방지
-- POST/PUT/DELETE 요청에 CSRF 토큰 검증
+- Authorization 헤더 기반 (Access Token) → CSRF 토큰 불필요 (헤더는 타사이트에서 자동 첨부 안 됨)
+- HttpOnly Cookie 기반 (Refresh Token) → SameSite=Strict + Origin 검증 (Phase 4 적용 예정)
+- 세션/쿠키 기반이 아니므로 전통적 CSRF 토큰은 도입하지 않음
 
 ### Rate Limiting
 - 이메일별: 5회/30분 (로그인 부르트포스)
